@@ -1,0 +1,120 @@
+import React, { useReducer } from "react";
+import Form from "./Form";
+
+const initialState = {
+  amount: "",
+  interestRate: "",
+  years: "",
+  downPayment: "",
+  monthlyPayment: null,
+  totalLoan: null,
+  totalInterest: null,
+  loanAmount: null,
+  error: null,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "AMOUNT": {
+      return { ...state, amount: action.payload };
+    }
+    case "INTEREST_RATE": {
+      return { ...state, interestRate: action.payload };
+    }
+    case "YEARS": {
+      return { ...state, years: action.payload };
+    }
+    case "DOWN_PAYMENT": {
+      return { ...state, downPayment: action.payload };
+    }
+    case "MONTHLY_PAYMENT": {
+      return { ...state, monthlyPayment: formatter(action.payload) };
+    }
+    case "TOTAL_LOAN": {
+      return { ...state, totalLoan: formatter(action.payload) };
+    }
+    case "TOTAL_INTEREST": {
+      return { ...state, totalInterest: formatter(action.payload) };
+    }
+    case "LOAN_AMOUNT": {
+      return {
+        ...state,
+        loanAmount: formatter(action.payload),
+      };
+    }
+    case "ERROR":
+      return { ...state, error: "Please fill in all fields" };
+    default:
+      throw new Error(`Unknown action type: ${action.type}`);
+  }
+}
+
+// adds space between every 3 digit
+function formatter(strOfNum) {
+  return strOfNum.replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
+}
+
+export default function Calculator() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
+
+  function handleSubmit() {
+    // Can I actually solve this by adding required to inputs?
+    if (!state.amount || !state.interestRate || !state.years) {
+      dispatch({
+        type: "ERROR",
+      });
+      alert("Please fill all the fields !!!");
+      dispatch({
+        type: "MONTHLY_PAYMENT",
+        payload: "",
+      });
+
+      return;
+    }
+
+    const loanAmount =
+      parseFloat(state.amount) -
+      (state.downPayment ? parseFloat(state.downPayment) : 0);
+
+    const interest = parseFloat(state.interestRate) / 100 / 12;
+    const months = parseFloat(state.years) * 12;
+
+    const numerator = loanAmount * interest * Math.pow(1 + interest, months);
+    const denominator = Math.pow(1 + interest, months) - 1;
+
+    const monthPay = (numerator / denominator).toFixed();
+    dispatch({
+      type: "MONTHLY_PAYMENT",
+      payload: monthPay,
+    });
+
+    const totalPay = (monthPay * months).toFixed();
+
+    dispatch({
+      type: "TOTAL_LOAN",
+      payload: totalPay,
+    });
+
+    const totalInterest = (totalPay - loanAmount).toFixed();
+    dispatch({
+      type: "TOTAL_INTEREST",
+      payload: totalInterest,
+    });
+
+    dispatch({
+      type: "LOAN_AMOUNT",
+      payload: loanAmount.toFixed(),
+    });
+  }
+
+  return (
+    <div>
+      <Form dispatch={dispatch} state={state} handleSubmit={handleSubmit} />
+      <p>Общая сумма: {state.totalLoan}</p>
+      <p>Ежемесячный платёж: {state.monthlyPayment}</p>
+      <p>Переплата по кредиту: {state.totalInterest}</p>
+      <p>Сумма кредита: {state.loanAmount}</p>
+    </div>
+  );
+}
