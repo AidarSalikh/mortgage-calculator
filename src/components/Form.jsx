@@ -3,7 +3,7 @@ import Range from "./Range";
 
 export default function Form({ state, dispatch, handleSubmit }) {
   return (
-    <div>
+    <>
       <Range
         min={0}
         dispatch={dispatch}
@@ -40,6 +40,6 @@ export default function Form({ state, dispatch, handleSubmit }) {
       <button onClick={handleSubmit} className="calculateBtn">
         Рассчитать
       </button>
-    </div>
+    </>
   );
 }

@@ -109,12 +109,25 @@ export default function Calculator() {
   }
 
   return (
-    <div>
+    <main className="main">
+      <h1>Ипотечный Калькулятор</h1>
       <Form dispatch={dispatch} state={state} handleSubmit={handleSubmit} />
-      <p>Общая сумма: {state.totalLoan}</p>
-      <p>Ежемесячный платёж: {state.monthlyPayment}</p>
-      <p>Переплата по кредиту: {state.totalInterest}</p>
-      <p>Сумма кредита: {state.loanAmount}</p>
-    </div>
+      <p>
+        <span>Общая сумма:</span>{" "}
+        <span className="result">{state.totalLoan} &#8381;</span>
+      </p>
+      <p>
+        <span>Ежемесячный платёж:</span>{" "}
+        <span className="result">{state.monthlyPayment} &#8381;</span>
+      </p>
+      <p>
+        <span>Переплата по кредиту: </span>{" "}
+        <span className="result">{state.totalInterest} &#8381;</span>
+      </p>
+      <p>
+        <span>Сумма кредита: </span>{" "}
+        <span className="result">{state.loanAmount} &#8381;</span>
+      </p>
+    </main>
   );
 }
