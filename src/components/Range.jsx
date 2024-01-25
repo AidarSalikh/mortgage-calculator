@@ -5,10 +5,10 @@ export default function Range({
   max,
   value,
   step,
-  dispatch,
   dType,
   label,
   symbol,
+  handleDispatch,
 }) {
   const [sliderRange, setSliderRange] = useState(value);
   const sliderRef = useRef(null);
@@ -20,7 +20,8 @@ export default function Range({
 
     setSliderRange(percentage);
 
-    dispatch({ type: `${dType}`, payload: sliderRef.current.value });
+    let newValue = parseInt(sliderRef.current.value);
+    handleDispatch(dType, newValue);
   }
 
   function handleNumberInput(e) {
@@ -32,17 +33,18 @@ export default function Range({
     }
     // Check if value is bigger or less than min/max
     if (newValue < min) {
-      dispatch({ type: `${dType}`, payload: min });
+      handleDispatch(dType, min);
       setSliderRange(0);
     } else if (newValue > max) {
-      dispatch({ type: `${dType}`, payload: max });
+      handleDispatch(dType, max);
       setSliderRange(100);
     } else {
-      dispatch({ type: `${dType}`, payload: newValue });
+      handleDispatch(dType, newValue);
 
       const range = max - min;
       const distance = newValue - min;
       const percentage = (distance / range) * 100;
+
       setSliderRange(percentage);
     }
   }
@@ -66,6 +68,7 @@ export default function Range({
           min={min}
           max={max}
           step={step}
+          required
         />
         <div className="symbol">
           <span>{symbol}</span>

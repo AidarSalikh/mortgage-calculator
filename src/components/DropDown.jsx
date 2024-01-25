@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { ACTIONS } from "./Calculator";
 
-export default function DropDown({ dispatch }) {
-  const [state, setState] = useState("");
+export default function DropDown({ handleDispatch }) {
   const options = [
     { id: 1, value: "1 год" },
     { id: 2, value: "2 года" },
@@ -14,12 +14,15 @@ export default function DropDown({ dispatch }) {
   ];
   return (
     <div className="dropdownContainer">
-      <p>Срок</p>
+      <label className="label" htmlFor="select">
+        Срок
+      </label>
       <div className="selectYear">
         <select
           onChange={(e) => {
-            dispatch({ type: "YEARS", payload: e.target.value });
+            handleDispatch(ACTIONS.YEARS, e.target.value);
           }}
+          id="select"
         >
           {options.map((option) => {
             return (

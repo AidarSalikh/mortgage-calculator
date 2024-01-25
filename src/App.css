@@ -10,7 +10,6 @@
 
 body {
   display: flex;
-  /* padding-top: 2rem; */
 }
 
 .main {
@@ -20,6 +19,8 @@ body {
 h1 {
   text-align: center;
 }
+
+/* SLIDER AND INPUT */
 
 .range-slider {
   display: flex;
@@ -87,12 +88,6 @@ h1 {
   pointer-events: none;
 }
 
-/* .slider-values {
-  position: absolute;
-  display: flex;
-  top: 0.5em;
-} */
-
 .min {
   left: 0;
 }
@@ -103,6 +98,8 @@ h1 {
 
 .label {
   align-self: flex-start;
+  margin-bottom: 0.1rem;
+  color: #fff;
 }
 
 .number-input-container {
@@ -114,12 +111,10 @@ h1 {
   background: none;
   color: #fff;
 
-  /* height: 4em; */
   border: 1px gray solid;
   border-bottom: none;
   border-radius: 4px;
   width: 100%;
-  /* max-width: 30.2em; */
   font-size: 1rem;
   padding: 1rem;
 }

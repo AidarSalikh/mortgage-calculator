@@ -1,41 +1,42 @@
 import DropDown from "./DropDown";
 import Range from "./Range";
+import { ACTIONS } from "./Calculator";
 
-export default function Form({ state, dispatch, handleSubmit }) {
+export default function Form({ state, handleSubmit, handleDispatch }) {
   return (
     <>
       <Range
         min={0}
-        dispatch={dispatch}
+        handleDispatch={handleDispatch}
         max={10000000}
         value={state.amount}
         step={1}
-        dType="AMOUNT"
+        dType={ACTIONS.AMOUNT}
         label="Стоимость недвижимости"
         symbol="&#8381;"
       />
       <Range
         min={0}
-        dispatch={dispatch}
+        handleDispatch={handleDispatch}
         max={100}
         value={state.interestRate}
         step={1}
-        dType="INTEREST_RATE"
+        dType={ACTIONS.INTEREST_RATE}
         label="Ставка"
         symbol="&#37;"
       />
 
       <Range
         min={0}
-        dispatch={dispatch}
+        handleDispatch={handleDispatch}
         max={10000000}
         value={state.downPayment}
         step={1}
-        dType="DOWN_PAYMENT"
+        dType={ACTIONS.DOWN_PAYMENT}
         label="Первоначальный взнос"
         symbol="&#8381;"
       />
-      <DropDown dispatch={dispatch} />
+      <DropDown handleDispatch={handleDispatch} />
 
       <button onClick={handleSubmit} className="calculateBtn">
         Рассчитать
