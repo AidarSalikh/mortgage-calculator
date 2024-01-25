@@ -42,6 +42,7 @@ function reducer(state, action) {
         loanAmount: formatter(action.payload),
       };
     }
+    // consider deleting error case
     case "ERROR":
       return { ...state, error: "Please fill in all fields" };
     default:
@@ -51,7 +52,7 @@ function reducer(state, action) {
 
 // adds space between every 3 digit
 function formatter(strOfNum) {
-  return strOfNum.replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
+  return strOfNum.split(/(?=(?:\d{3})+$)/).join(" ");
 }
 
 export default function Calculator() {
@@ -59,7 +60,6 @@ export default function Calculator() {
   console.log(state);
 
   function handleSubmit() {
-    // Can I actually solve this by adding required to inputs?
     if (!state.amount || !state.interestRate || !state.years) {
       dispatch({
         type: "ERROR",

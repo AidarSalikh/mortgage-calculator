@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: aquamarine;
+  color: #fff;
   width: 90vw;
   max-width: 30em;
   margin-top: 2em;
@@ -39,7 +39,7 @@ body {
   height: 0.5em;
   outline: none;
   border-radius: 3px;
-  background-color: rgb(63, 148, 44);
+  background-color: rgb(157, 160, 156);
   box-shadow: inset 3px 3px 6px black, 1px 1px 1px gray;
   cursor: pointer;
 }
@@ -78,11 +78,11 @@ body {
   pointer-events: none;
 }
 
-.slider-values {
+/* .slider-values {
   position: absolute;
   display: flex;
   top: 0.5em;
-}
+} */
 
 .min {
   left: 0;
@@ -94,6 +94,11 @@ body {
 
 .label {
   align-self: flex-start;
+}
+
+.number-input-container {
+  position: relative;
+  width: 100%;
 }
 
 .number-input {
@@ -108,6 +113,23 @@ body {
   /* max-width: 30.2em; */
   font-size: 1rem;
   padding: 1rem;
+}
+
+.symbol {
+  position: absolute;
+  width: 3rem;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-left: 1px solid gray;
+}
+
+.symbol span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
 }
 
 .range-slider:hover .progress {
@@ -135,4 +157,63 @@ input::-webkit-inner-spin-button {
 
 .calculateBtn:hover {
   background-color: #1272d8;
+}
+
+/* DROPDOWN  */
+
+.dropdownContainer {
+  margin-top: 2em;
+}
+
+select {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 4px;
+  padding: 1rem;
+  border: 1px gray solid;
+}
+
+.selectYear {
+  position: relative;
+}
+.customArrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  background: transparent;
+  height: 100%;
+  width: 3rem;
+  border-left: 1px solid gray;
+  pointer-events: none;
+}
+
+.customArrow::after,
+.customArrow::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.customArrow::before {
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid rgba(255, 255, 255, 0.5);
+
+  top: 35%;
+}
+.customArrow::after {
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-top: 0.5rem solid rgba(255, 255, 255, 0.5);
+
+  top: 60%;
 }
