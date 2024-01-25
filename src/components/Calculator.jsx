@@ -4,7 +4,7 @@ import Form from "./Form";
 const initialState = {
   amount: "",
   interestRate: "",
-  years: "",
+  years: 1,
   downPayment: "",
   monthlyPayment: null,
   totalLoan: null,
@@ -112,22 +112,24 @@ export default function Calculator() {
     <main className="main">
       <h1>Ипотечный Калькулятор</h1>
       <Form dispatch={dispatch} state={state} handleSubmit={handleSubmit} />
-      <p>
-        <span>Общая сумма:</span>{" "}
-        <span className="result">{state.totalLoan} &#8381;</span>
-      </p>
-      <p>
-        <span>Ежемесячный платёж:</span>{" "}
-        <span className="result">{state.monthlyPayment} &#8381;</span>
-      </p>
-      <p>
-        <span>Переплата по кредиту: </span>{" "}
-        <span className="result">{state.totalInterest} &#8381;</span>
-      </p>
-      <p>
-        <span>Сумма кредита: </span>{" "}
-        <span className="result">{state.loanAmount} &#8381;</span>
-      </p>
+      <section className="resultInfo">
+        <p>
+          <span>Общая сумма:</span>{" "}
+          <span className="result">{state.totalLoan} &#8381;</span>
+        </p>
+        <p>
+          <span>Ежемесячный платёж:</span>{" "}
+          <span className="result">{state.monthlyPayment} &#8381;</span>
+        </p>
+        <p>
+          <span>Переплата по кредиту: </span>{" "}
+          <span className="result">{state.totalInterest} &#8381;</span>
+        </p>
+        <p>
+          <span>Сумма кредита: </span>{" "}
+          <span className="result">{state.loanAmount} &#8381;</span>
+        </p>
+      </section>
     </main>
   );
 }

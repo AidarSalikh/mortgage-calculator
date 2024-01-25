@@ -162,6 +162,7 @@ input::-webkit-inner-spin-button {
   border-radius: 4px;
   border: none;
   font-weight: 500;
+  color: #fff;
 }
 
 .calculateBtn:hover {
@@ -184,6 +185,7 @@ select {
   border-radius: 4px;
   padding: 1rem;
   border: 1px gray solid;
+  color: #fff;
 }
 
 .selectYear {
@@ -229,7 +231,7 @@ select {
 
 /* RESULT */
 
-.main p {
+.resultInfo p {
   border-bottom: 1px solid gray;
   margin-top: 1rem;
   display: flex;
